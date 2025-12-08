@@ -1,0 +1,29 @@
+# Directorios y archivos de compilación
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Archivos de configuración y datos sensibles
+.env
+.env.*
+*.log
+*.sqlite3
+
+# Archivos de sistema operativo (macOS, Windows)
+.DS_Store
+Thumbs.db
+
+# Archivos de IDE (Opcional, según tu editor)
+.vscode/
+.idea/
+
+# Archivos de pruebas y build
+.pytest_cache/
+build/
+dist/
