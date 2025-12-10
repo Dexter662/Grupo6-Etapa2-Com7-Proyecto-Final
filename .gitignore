@@ -27,3 +27,6 @@ Thumbs.db
 .pytest_cache/
 build/
 dist/
+
+# contenido de la carpeta media
+media/
