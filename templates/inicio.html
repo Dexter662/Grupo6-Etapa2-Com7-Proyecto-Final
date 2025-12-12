@@ -4,19 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INICIO</title>
+    <title>{% block titulo %}COM7 | INICIO{% endblock %}</title>
+    {% block estilos %}{% endblock %}
 </head>
 
 <body>
-    <header style="background-color: lightblue;">
-        INICIO
+    <header style="background-color: lightblue; padding: 20px; text-align: center;">
+        <h1>{% block encabezado %}INICIO{% endblock %}</h1>
     </header>
-    <main>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem provident sunt soluta corporis, illo quaerat
-        quae odio laboriosam quo deserunt adipisci repudiandae est voluptates voluptatem eum necessitatibus, nobis
-        minima aperiam.
+
+    <main style="padding: 20px; min-height: 400px;">
+        {% block contenido %}
+        <h2>BIENVENIDO 🏠</h2>
+
+        {% if user.is_authenticated %}
+        <p>Hola, <strong>{{ user.username }}</strong>! 👋</p>
+        <p>Has iniciado sesión correctamente.</p>
+
+        <div style="margin-top: 20px;">
+            <a href="{% url 'apps.autenticacion:cerrar_sesion' %}" style="text-decoration: none;">
+                <button type="button">Cerrar Sesión</button>
+            </a>
+        </div>
+        {% else %}
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem provident sunt soluta corporis, illo quaerat
+            quae odio laboriosam quo deserunt adipisci repudiandae est voluptates voluptatem eum necessitatibus, nobis
+            minima aperiam.</p>
+
+        <div style="margin-top: 20px;">
+            <a href="{% url 'apps.autenticacion:ingresar' %}" style="text-decoration: none;">
+                <button type="button">Iniciar Sesión 🔐</button>
+            </a>
+            <a href="{% url 'apps.autenticacion:registrar' %}" style="text-decoration: none;">
+                <button type="button">Crear Cuenta 📝</button>
+            </a>
+        </div>
+        {% endif %}
+        {% endblock %}
     </main>
-    <footer style="background-color: lightblue;">
+
+    <footer style="background-color: lightblue; padding: 20px; text-align: center;">
         <hr>
         <h4>INFORMATORIO</h4>
         <strong>Etapa 2 - Comision 7</strong>
@@ -24,6 +51,8 @@
         <small>Segunda Cohorte 2025</small>
         <hr>
     </footer>
+
+    {% block scripts %}{% endblock %}
 </body>
 
 </html>

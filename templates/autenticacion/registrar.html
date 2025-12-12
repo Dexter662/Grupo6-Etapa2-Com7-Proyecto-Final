@@ -1,0 +1,22 @@
+{% extends "inicio.html" %}
+
+{% block titulo %}COM7 | REGISTRAR{% endblock %}
+
+{% block encabezado %}REGISTRAR{% endblock %}
+
+{% block contenido %}
+<h2>CREA UNA CUENTA 📝</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registrar</button>
+</form>
+
+<div style="margin-top: 20px;">
+    <p>¿Ya tienes cuenta? <a href="{% url 'apps.autenticacion:ingresar' %}">Inicia sesión aquí</a></p>
+</div>
+
+<div style="margin-top: 20px;">
+    <a href="{% url 'inicio' %}">Volver al menu</a>
+</div>
+{% endblock %}
