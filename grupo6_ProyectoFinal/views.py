@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import user_passes_test
 from .models import Role
 
+# Create your views here.
+
+def inicio(request):
+    return render(request, 'inicio.html')
 def es_autor(user):
     return user.is_authenticated and user.profile.role == Role.AUTHOR
 
