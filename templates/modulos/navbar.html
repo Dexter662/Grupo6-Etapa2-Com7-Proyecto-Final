@@ -1,0 +1,22 @@
+<header class="navbar">
+    <div class="nav-wrapper">
+        <h1>🌱 Proyecto Final</h1>
+        <nav>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            {% if user.is_authenticated %}
+
+            <a href="{% url 'apps.autenticacion:cerrar_sesion' %}">
+                <button type="button">Cerrar Sesión</button>
+            </a>
+        {% else %}
+
+            <a href="{% url 'apps.autenticacion:ingresar' %}">
+                <button type="button">Iniciar Sesión 🔐</button>
+            </a>
+            <a href="{% url 'apps.autenticacion:registrar' %}">
+                <button type="button">Crear Cuenta 📝</button>
+            </a>
+        {% endif %}
+        </nav>
+    </div>
+</header>

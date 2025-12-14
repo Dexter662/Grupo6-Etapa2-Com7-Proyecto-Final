@@ -1,10 +1,7 @@
-{% extends "inicio.html" %}
+{% extends 'base.html' %}
 
-{% block titulo %}COM7 | REGISTRAR{% endblock %}
-
-{% block encabezado %}REGISTRAR{% endblock %}
-
-{% block contenido %}
+{% block title %}Inicio de Sesion{% endblock %}
+{% block content %}
 <h2>CREA UNA CUENTA 📝</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}

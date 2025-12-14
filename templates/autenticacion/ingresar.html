@@ -1,11 +1,9 @@
-{% extends "inicio.html" %}
+{% extends 'base.html' %}
 
-{% block titulo %}COM7 | INGRESAR{% endblock %}
+{% block title %}Inicio de Sesion{% endblock %}
+{% block content %}
+<h2>INICIAR SESION 🔐</h2>              
 
-{% block encabezado %}INGRESAR{% endblock %}
-
-{% block contenido %}
-<h2>INICIAR SESION 🔐</h2>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
