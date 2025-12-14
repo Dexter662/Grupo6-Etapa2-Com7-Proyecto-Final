@@ -60,9 +60,16 @@
                 </a>
             </li>
             <li>
-                <a href="{% url 'posts:post_create' %}">
+                <a href="{% url 'posts:crear' %}">
                     <button type="button">Crear Publicación ➕</button>
                 </a>
+            </li>
+            <li>
+                {% if user.id == request.user.id %}
+                    <a href="{% url 'users:profile_edit' %}">
+                        <button type="button">Editar perfil</button>
+                    </a>
+                {% endif %}
             </li>
         </ul>
 
@@ -82,6 +89,13 @@
                 <a href="{% url 'users:detail' user.id %}">
                     <button type="button">Mi Perfil 👤</button>
                 </a>
+            </li>
+            <li>
+                {% if user.id == request.user.id %}
+                    <a href="{% url 'users:profile_edit' %}">
+                        <button type="button">Editar perfil</button>
+                    </a>
+                {% endif %}
             </li>
         </ul>
 
