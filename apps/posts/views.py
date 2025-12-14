@@ -26,6 +26,9 @@ def post_list(request):
 
 @login_required
 def post_create(request):
+    if request.user.rol not in ['admin', 'author']:
+        return redirect('inicio')
+    
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():

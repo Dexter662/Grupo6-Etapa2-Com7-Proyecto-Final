@@ -3,7 +3,9 @@
 {% block content %}
 <h1>Publicaciones</h1>
 
-<a href="{% url 'posts:crear' %}">Nueva publicación</a>
+{% if user.is_authenticated and user.rol == 'admin' or user.rol == 'author' %}
+    <a href="{% url 'posts:crear' %}">Nueva publicación</a>
+{% endif %}
 
 {% for post in posts %}
     <article>
