@@ -15,8 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings # Necesario para media
+from django.conf.urls.static import static # Necesario para media
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    # URLS de la API V1
+    path('api/v1/', include('apps.users.urls')), 
+    path('api/v1/', include('apps.posts.urls')), 
+
+    #Habilita los formularios de 'Log in' y 'Log out' de DRF
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
+
+# Servir archivos de Media (para imágenes)
+# if settings.DEBUG:
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
