@@ -42,6 +42,8 @@ def ingresar_usuario(request):
 
     return render(request, 'autenticacion/ingresar.html', {'form': form})
 
+def confirmar_logout(request):
+    return render(request, 'autenticacion/confirmar_logout.html')
 
 def cerrar_sesion(request):
     logout(request)

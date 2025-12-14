@@ -1,6 +1,11 @@
 from django.urls import path
+from .views import user_list, user_detail, profile_edit, user_delete
 
-# Aquí irán las rutas de registro, login, token, etc.
+app_name = 'users'
+
 urlpatterns = [
-    # path('register/', SomeView.as_view(), name='user_register'),
+    path('', user_list, name='list'),
+    path('<int:pk>/', user_detail, name='detail'),
+    path('<int:pk>/delete/', user_delete, name='delete'),
+    path('profile/edit/', profile_edit, name='profile_edit'),
 ]

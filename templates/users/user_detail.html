@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ user_obj.username }}</h2>
+
+<p>Email: {{ user_obj.email }}</p>
+<p>Rol: {{ user_obj.get_rol_display }}</p>
+
+{% if user_obj.profile %}
+  <p>Bio: {{ user_obj.profile.bio }}</p>
+  <p>Especialidad: {{ user_obj.profile.specialty }}</p>
+  <img src="{{ user_obj.profile.avatar.url }}" width="150">
+{% endif %}
+
+{% endblock %}
