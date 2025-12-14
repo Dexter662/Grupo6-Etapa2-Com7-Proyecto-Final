@@ -51,3 +51,10 @@ body {
 a {
     text-decoration: none
 }
+
+.disclaimer {
+    margin-top: 40px;   /* separación de arriba */
+    font-size: 0.9em;   /* un poco más chico */
+    color: #555;        /* gris suave */
+    text-align: center; /* opcional */
+}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import inicio
+from .views import inicio, contacto
 from django.conf import settings # Necesario para media
 from django.conf.urls.static import static # Necesario para media
 
@@ -20,6 +20,8 @@ urlpatterns = [
 
     #Habilita los formularios de 'Log in' y 'Log out' de DRF
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    
+    path('contacto/', contacto, name='contacto'),
 ]
 
 # Servir archivos de Media (para imágenes)
