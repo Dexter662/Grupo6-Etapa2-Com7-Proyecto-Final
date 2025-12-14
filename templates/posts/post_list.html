@@ -1,3 +1,22 @@
+<form method="get">
+    <select name="categoria">
+        <option value="">Todas las categorías</option>
+        {% for categoria in categorias %}
+            <option value="{{ categoria.id }}"
+                {% if categoria.id|stringformat:"s" == categoria_seleccionada %}
+                    selected
+                {% endif %}
+            >
+                {{ categoria.nombre }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <input type="date" name="fecha" value="{{ fecha_seleccionada }}">
+
+    <button type="submit">Filtrar</button>
+</form>
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -8,6 +27,7 @@
 {% for post in posts %}
     <article>
         <h2>{{ post.title }}</h2>
+        <p><strong>Categoría:</strong> {{ post.categoria }}</p>
         <p>{{ post.content|truncatewords:30 }}</p>
 
         {% if post.image %}

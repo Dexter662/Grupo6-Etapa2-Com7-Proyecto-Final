@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .models import Post
+from .models import Post, Categoria
 from .forms import PostForm
 from .serializers import PostSerializer
 from .permissions import IsAuthorOrReadOnly
@@ -21,8 +21,25 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'posts/post_list.html', {'posts': posts})
+    posts = Post.objects.all().select_related('categoria')
+
+    categoria_id = request.GET.get('categoria')
+    fecha = request.GET.get('fecha')
+
+    if categoria_id:
+        posts = posts.filter(categoria_id=categoria_id)
+
+    if fecha:
+        posts = posts.filter(created_at__date=fecha)
+
+    categorias = Categoria.objects.all()
+
+    return render(request, 'posts/post_list.html', {
+        'posts': posts,
+        'categorias': categorias,
+        'categoria_seleccionada': categoria_id,
+        'fecha_seleccionada': fecha,
+    })
 
 @login_required
 def post_create(request):
