@@ -12,7 +12,7 @@ class Categoria(models.Model):
         verbose_name_plural = 'Categorías'
         ordering = ['nombre']
 
-    def _str_(self):
+    def __str__(self):
         return self.nombre
 
 class Post(models.Model):
