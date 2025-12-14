@@ -17,7 +17,9 @@
     <td>{{ user.get_rol_display }}</td>
     <td>
       <a href="{% url 'users:detail' user.id %}">Ver</a>
-      <a href="{% url 'users:edit' user.id %}">Editar</a>
+      {% if request.user.rol == 'admin' %}
+          <a href="{% url 'users:edit' user.id %}">Editar</a>
+      {% endif %}
       <a href="{% url 'users:delete' user.id %}">Eliminar</a>
     </td>
   </tr>

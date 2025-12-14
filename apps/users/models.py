@@ -11,7 +11,7 @@ class Profile(models.Model):
     specialty = models.CharField(max_length=100, blank=True)
     avatar = models.ImageField(
         upload_to='avatars/',
-        default='avatars/default.jpg',
+        null=True,
         blank=True
     )
 

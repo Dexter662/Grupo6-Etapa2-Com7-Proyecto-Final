@@ -6,3 +6,6 @@ from django.contrib.auth.decorators import user_passes_test
 
 def inicio(request):
     return render(request, 'inicio.html')
+
+def contacto(request):
+    return render(request, 'contacto.html')

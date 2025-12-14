@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block content %}
+
+<h2>Contacto 📬</h2>
+
+<p>
+    Esta página corresponde a la información de contacto del <strong>Proyecto Final</strong>
+    realizado para el curso <strong>Informatorio</strong>.
+</p>
+
+<h3>Integrantes del grupo</h3>
+<ul>
+    <li>Integrante 1</li>
+    <li>Integrante 2</li>
+    <li>Integrante 3</li>
+    <li>Integrante 4</li>
+    <li>Integrante 5</li>
+    <li>Integrante 6</li>
+    <li>Jaimito</li>
+</ul>
+
+<h3>Información de contacto</h3>
+<p>
+    📧 Correo electrónico: <strong>contacto@ejemplo.com</strong><br>
+    📞 Teléfono: <strong>(011) 1234-5678</strong><br>
+    👥 Grupo Numero: <strong>6</strong><br>
+    🏫 Comisión: <strong>7</strong><br>
+    📅 Año: 2025
+</p>
+
+
+
+<a href="{% url 'inicio' %}">
+    <button type="button">Volver al inicio 🏠</button>
+</a>
+
+
+
+<p class="disclaimer">
+   <em>
+   Este sitio fue desarrollado en el marco de un proyecto integrador grupal,
+   con fines informativos y de acceso gratuito,
+   sin representar ninguna entidad comercial.
+   </em>
+</p>
+
+
+
+{% endblock %}
