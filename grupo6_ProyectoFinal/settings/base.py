@@ -129,3 +129,8 @@ REST_FRAMEWORK = {
     ),
 }
 AUTH_USER_MODEL = 'autenticacion.Usuario'
+
+# Autenticación
+LOGIN_URL = '/autenticacion/ingresar/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
