@@ -9,7 +9,15 @@
 {% if user_obj.profile %}
   <p>Bio: {{ user_obj.profile.bio }}</p>
   <p>Especialidad: {{ user_obj.profile.specialty }}</p>
-  <img src="{{ user_obj.profile.avatar.url }}" width="150">
+
+  {% load static %}
+
+  {% if user_obj.profile and user_obj.profile.avatar %}
+      <img src="{{ user_obj.profile.avatar.url }}" width="150" alt="Avatar">
+  {% else %}
+      <img src="{% static 'avatars/default.jpg' %}" width="150" alt="Avatar por defecto">
+  {% endif %}
+
 {% endif %}
 
 {% endblock %}
