@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-7h7o)m8vc-jei$oe6bm)&-2iw+68zm1@*xknu-s%-)+$fga&os
 # Application definition
 
 INSTALLED_APPS = [
+    'apps.autenticacion',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,8 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',  # Necesario para la API REST (Django Rest Framework)
     'apps.posts',          # nueva aplicación de publicaciones
     # ---------------------
-    'apps.publicaciones',
-    'apps.autenticacion',
+    #'apps.publicaciones',
 ]
 
 MIDDLEWARE = [

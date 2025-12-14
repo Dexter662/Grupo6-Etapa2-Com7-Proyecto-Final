@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmacion Logout{% endblock %}
+{% block content %}
+
+<h2>¿Cerrar sesión?</h2>
+<p>¿Estás seguro que querés cerrar sesión?</p>
+
+<a href="{% url 'apps.autenticacion:cerrar_sesion' %}">
+    Sí, cerrar sesión
+</a>
+
+<a href="{% url 'inicio' %}">
+    Cancelar
+</a>
+
+{% endblock %}
