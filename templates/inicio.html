@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+<h2>BIENVENIDO 🏠</h2>
+
+        {% if user.is_authenticated %}
+        <p>Hola, <strong>{{ user.username }}</strong>! 👋</p>
+        <p>Has iniciado sesión correctamente.</p>
+        {% else %}
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem provident sunt soluta corporis, illo quaerat
+            quae odio laboriosam quo deserunt adipisci repudiandae est voluptates voluptatem eum necessitatibus, nobis
+            minima aperiam.</p>
+        {% endif %}
+
+
+{% endblock %}

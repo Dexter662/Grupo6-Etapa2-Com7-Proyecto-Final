@@ -33,10 +33,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'apps.users',
     'rest_framework',  # Necesario para la API REST (Django Rest Framework)
     'apps.posts',          # nueva aplicación de publicaciones
     # ---------------------
+    'apps.publicaciones',
+    'apps.autenticacion',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +128,4 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
 }
+AUTH_USER_MODEL = 'autenticacion.Usuario'

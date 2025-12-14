@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio de Sesion{% endblock %}
+{% block content %}
+<h2>INICIAR SESION 🔐</h2>              
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ingresar</button>
+</form>
+
+<div style="margin-top: 20px;">
+    <p>¿No tienes cuenta? <a href="{% url 'apps.autenticacion:registrar' %}">Regístrate aquí</a></p>
+</div>
+<div style="margin-top: 20px;">
+    <a href="{% url 'inicio' %}">Volver al menu</a>
+</div>
+{% endblock %}

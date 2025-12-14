@@ -1,5 +1,5 @@
+from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
 
 class Role(models.TextChoices):
     ADMIN = 'admin', 'Administrador'
@@ -7,7 +7,7 @@ class Role(models.TextChoices):
     USER = 'user', 'Usuario / Agricultor'
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
     role = models.CharField(max_length=10, choices=Role.choices, default=Role.USER)
     bio = models.TextField(blank=True)
     specialty = models.CharField(max_length=100, blank=True)

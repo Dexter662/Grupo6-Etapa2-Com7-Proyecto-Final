@@ -1,0 +1,20 @@
+<h1>Listado de Publicaciones</h1>
+
+<form method="get">
+    <input type="text" name="categoria" placeholder="Filtrar por categoría">
+    <input type="date" name="fecha">
+    <button type="submit">Filtrar</button>
+</form>
+
+<ul>
+    {% for post in posts %}
+        <li>
+            <h2>{{ post.titulo }}</h2>
+            <p>{{ post.contenido }}</p>
+            <p><strong>Categoría:</strong> {{ post.categoria.nombre }}</p>
+            <p><strong>Fecha:</strong> {{ post.fecha_publicacion }}</p>
+        </li>
+    {% empty %}
+        <p>No hay publicaciones para mostrar</p>
+    {% endfor %}
+</ul>
