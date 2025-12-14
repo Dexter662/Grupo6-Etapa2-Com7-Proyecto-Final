@@ -5,10 +5,6 @@ from .views import inicio
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', inicio, name="inicio"),
-    path('autenticacion/', include('apps.autenticacion.urls')),
-
-urlpatterns = [
-     #path('admin/', admin.site.urls),
-
-    path('publicaciones/', include('apps.publicaciones.urls'))
+    path('publicaciones/', include('apps.publicaciones.urls')),
+    path('autenticacion/', include('apps.autenticacion.urls'))
 ]
