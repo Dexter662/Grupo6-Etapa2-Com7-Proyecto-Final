@@ -5,6 +5,42 @@
 
 {% block content %}
 
+<form method="get">
+    <select name="categoria">
+        <option value="">Todas las categorías</option>
+        {% for categoria in categorias %}
+            <option value="{{ categoria.id }}"
+                {% if categoria.id|stringformat:"s" == categoria_seleccionada %}
+                    selected
+                {% endif %}
+            >
+                {{ categoria.nombre }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <input type="date" name="fecha" value="{{ fecha_seleccionada }}">
+
+    <button type="submit">Filtrar</button>
+</form>
+
+<a href="{% url 'posts:crear' %}">Nueva publicación</a>
+
+{% for post in posts %}
+    <article>
+        <h2>{{ post.title }}</h2>
+        <p><strong>Categoría:</strong> {{ post.categoria }}</p>
+        <p>{{ post.content|truncatewords:30 }}</p>
+
+        {% if post.image %}
+            <img src="{{ post.image.url }}" width="200">
+        {% endif %}
+
+        {% if post.author == user or user.is_staff %}
+            <a href="{% url 'posts:editar' post.id %}">Editar</a>
+            <a href="{% url 'posts:eliminar' post.id %}">Eliminar</a>
+        {% endif %}
+    </article>
 <h2 class="mb-4 text-success fw-bold">📰 Publicaciones</h2>
 
 {% if user.is_authenticated and user.rol == 'admin' or user.rol == 'author' %}
@@ -68,6 +104,7 @@
     <p>No hay publicaciones.</p>
 {% endfor %}
 
+{% endblock %}
 </div>
 
 {% endblock %}

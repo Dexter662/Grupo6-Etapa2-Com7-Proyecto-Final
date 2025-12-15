@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .models import Post, Categoria
+from .forms import PostForm
 from .models import Post, Comment
 from .forms import CommentForm, PostForm
 from .serializers import PostSerializer
@@ -22,8 +24,36 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'posts/post_list.html', {'posts': posts})
+    # Traemos todos los posts con la categoría ya relacionada
+    posts = Post.objects.all().select_related('categoria', 'author')
+
+    # Filtrado por usuario según tipo
+    if request.user.is_authenticated:
+        if not request.user.is_staff:  # Usuario logueado pero no admin
+            posts = posts.filter(author=request.user)
+    else:
+        # Usuario no logueado: solo lectura, mostramos todos
+        pass 
+
+    # Filtrado por categoría
+    categoria_id = request.GET.get('categoria')
+    if categoria_id:
+        posts = posts.filter(categoria_id=categoria_id)
+
+    # Filtrado por fecha
+    fecha = request.GET.get('fecha')
+    if fecha:
+        posts = posts.filter(created_at__date=fecha)
+
+    # Traer todas las categorías para el select
+    categorias = Categoria.objects.all()
+
+    return render(request, 'posts/post_list.html', {
+        'posts': posts,
+        'categorias': categorias,
+        'categoria_seleccionada': categoria_id,
+        'fecha_seleccionada': fecha,
+    })
 
 @login_required
 def post_create(request):
@@ -47,7 +77,10 @@ def post_create(request):
 
 @login_required
 def post_update(request, pk):
-    post = get_object_or_404(Post, pk=pk, author=request.user)
+    post = get_object_or_404(Post, pk=pk)
+    # Verificamos permisos: autor o admin
+    if post.author != request.user and not request.user.is_staff:
+        return redirect('posts:lista')
 
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
@@ -64,7 +97,10 @@ def post_update(request, pk):
 
 @login_required
 def post_delete(request, pk):
-    post = get_object_or_404(Post, pk=pk, author=request.user)
+    post = get_object_or_404(Post, pk=pk)
+    # Verificamos permisos: autor o admin
+    if post.author != request.user and not request.user.is_staff:
+        return redirect('posts:lista')
 
     if request.method == 'POST':
         post.delete()

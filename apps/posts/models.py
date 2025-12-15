@@ -4,6 +4,20 @@ from django.conf import settings
 # Create your models here.
 from django.conf import settings # Importamos settings para referenciar al User
 
+# Agrego modelo de categoria
+
+class Categoria(models.Model):
+    nombre = models.CharField(max_length=100, unique=True, verbose_name='Nombre')
+    creada = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de Creación')
+
+    class Meta:
+        verbose_name = 'Categoría'
+        verbose_name_plural = 'Categorías'
+        ordering = ['nombre']
+
+    def __str__(self):
+        return self.nombre
+
 class Post(models.Model):
     """
     Modelo para representar una publicación.
@@ -27,7 +41,16 @@ class Post(models.Model):
         null=True,
         verbose_name='Imagen de la Publicación'
     )
-    
+
+    categoria = models.ForeignKey(  #nuevo agregado
+        Categoria,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='posts',
+        verbose_name='Categoría'
+    )
+       
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de Creación')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Última Actualización')
 
