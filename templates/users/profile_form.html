@@ -1,11 +1,68 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}Editar perfil{% endblock %}
 
 {% block content %}
-<h2>Editar perfil</h2>
 
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Guardar</button>
-</form>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">✏️ Editar perfil</h4>
+            </div>
+
+            <div class="card-body">
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="text-center mb-3">
+                        {% if request.user.profile.avatar %}
+                            <img src="{{ request.user.profile.avatar.url }}"
+                                 class="rounded-circle mb-2"
+                                 width="120" height="120"
+                                 style="object-fit: cover;"
+                                 alt="Avatar">
+                        {% else %}
+                            <img src="{% static 'avatars/default.jpg' %}"
+                                 class="rounded-circle mb-2"
+                                 width="120" height="120"
+                                 style="object-fit: cover;"
+                                 alt="Avatar por defecto">
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label class="form-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="text-danger small">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'users:detail' request.user.id %}" class="btn btn-outline-secondary">
+                            ⬅ Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            💾 Guardar cambios
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
 {% endblock %}

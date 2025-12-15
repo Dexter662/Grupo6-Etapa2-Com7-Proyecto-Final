@@ -1,23 +1,83 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}Perfil de {{ user_obj.username }}{% endblock %}
 
 {% block content %}
-<h2>{{ user_obj.username }}</h2>
 
-<p>Email: {{ user_obj.email }}</p>
-<p>Rol: {{ user_obj.get_rol_display }}</p>
+<div class="row justify-content-center">
+    <div class="col-md-8">
 
-{% if user_obj.profile %}
-  <p>Bio: {{ user_obj.profile.bio }}</p>
-  <p>Especialidad: {{ user_obj.profile.specialty }}</p>
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
 
-  {% load static %}
+                {% if user_obj.profile and user_obj.profile.avatar %}
+                    <img src="{{ user_obj.profile.avatar.url }}"
+                         class="rounded-circle mb-3"
+                         width="150" height="150"
+                         style="object-fit: cover;"
+                         alt="Avatar de {{ user_obj.username }}">
+                {% else %}
+                    <img src="{% static 'avatars/default.jpg' %}"
+                         class="rounded-circle mb-3"
+                         width="150" height="150"
+                         style="object-fit: cover;"
+                         alt="Avatar por defecto">
+                {% endif %}
 
-  {% if user_obj.profile and user_obj.profile.avatar %}
-      <img src="{{ user_obj.profile.avatar.url }}" width="150" alt="Avatar">
-  {% else %}
-      <img src="{% static 'avatars/default.jpg' %}" width="150" alt="Avatar por defecto">
-  {% endif %}
+                <h3 class="fw-bold">{{ user_obj.username }}</h3>
 
-{% endif %}
+                <span class="badge 
+                    {% if user_obj.rol == 'admin' %} bg-danger
+                    {% elif user_obj.rol == 'author' %} bg-primary
+                    {% else %} bg-secondary {% endif %}
+                ">
+                    {{ user_obj.get_rol_display }}
+                </span>
+
+                <hr>
+
+                <p class="mb-1">
+                    <strong>Email:</strong> {{ user_obj.email|default:"—" }}
+                </p>
+
+                {% if user_obj.profile %}
+                    {% if user_obj.profile.bio %}
+                        <p class="mt-2">
+                            <strong>Biografía:</strong><br>
+                            {{ user_obj.profile.bio }}
+                        </p>
+                    {% endif %}
+
+                    {% if user_obj.profile.specialty %}
+                        <p>
+                            <strong>Especialidad:</strong>
+                            {{ user_obj.profile.specialty }}
+                        </p>
+                    {% endif %}
+                {% endif %}
+
+                <hr>
+
+                <div class="d-flex justify-content-center gap-2">
+
+                    <a href="{% url 'users:list' %}" class="btn btn-outline-secondary">
+                        ⬅ Volver
+                    </a>
+
+                    {% if request.user == user_obj or request.user.rol == 'admin' %}
+                        <a href="{% url 'users:edit' user_obj.id %}"
+                           class="btn btn-outline-warning">
+                            ✏️ Editar perfil
+                        </a>
+                    {% endif %}
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
 
 {% endblock %}

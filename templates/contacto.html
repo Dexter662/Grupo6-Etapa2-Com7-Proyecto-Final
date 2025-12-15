@@ -4,40 +4,53 @@
 
 {% block content %}
 
-<h2>Contacto 📬</h2>
+<div class="text-center mb-4">
+    <h2 class="fw-bold">Contacto 📬</h2>
+</div>
 
-<p>
-    Esta página corresponde a la información de contacto del <strong>Proyecto Final</strong>
-    realizado para el curso <strong>Informatorio</strong>.
-</p>
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <p class="card-text">
+            Esta página corresponde a la información de contacto del
+            <strong>Proyecto Final</strong> realizado para el curso
+            <strong>Informatorio</strong>.
+        </p>
+    </div>
+</div>
 
-<h3>Integrantes del grupo</h3>
-<ul>
-    <li>Alejandro Basualdo</li>
-    <li>Gabriel Eliseo Sanchez</li>
-    <li>Hector Manuel Medina</li>
-    <li>Luka Edgardo Burgos Salvadeo</li>
-    <li>María Emilia Rodríguez</li>
-    <li>Rodrigo Peñaflor</li>
-</ul>
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-success text-white">
+        Integrantes del grupo 👥
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Alejandro Basualdo</li>
+        <li class="list-group-item">Gabriel Eliseo Sanchez</li>
+        <li class="list-group-item">Hector Manuel Medina</li>
+        <li class="list-group-item">Luka Edgardo Burgos Salvadeo</li>
+        <li class="list-group-item">María Emilia Rodríguez</li>
+        <li class="list-group-item">Rodrigo Peñaflor</li>
+    </ul>
+</div>
 
-<h3>Información de contacto</h3>
-<p>
-    📧 Correo electrónico: <strong>contacto@ejemplo.com</strong><br>
-    📞 Teléfono: <strong>(011) 1234-5678</strong><br>
-    👥 Grupo Numero: <strong>6</strong><br>
-    🏫 Comisión: <strong>7</strong><br>
-    📅 Año: 2025
-</p>
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-success text-white">
+        Información de contacto 📌
+    </div>
+    <div class="card-body">
+        <p class="mb-1">📧 Correo electrónico: <strong>contacto@ejemplo.com</strong></p>
+        <p class="mb-1">📞 Teléfono: <strong>(011) 1234-5678</strong></p>
+        <p class="mb-1">👥 Grupo Número: <strong>6</strong></p>
+        <p class="mb-1">🏫 Comisión: <strong>7</strong></p>
+        <p class="mb-0">📅 Año: <strong>2025</strong></p>
+    </div>
+</div>
 
-<p class="disclaimer">
-   <em>
-   Este sitio fue desarrollado en el marco de un proyecto integrador grupal,
-   con fines informativos y de acceso gratuito,
-   sin representar ninguna entidad comercial.
-   </em>
-</p>
-
-
+<div class="alert alert-secondary">
+    <em>
+        Este sitio fue desarrollado en el marco de un proyecto integrador grupal,
+        con fines informativos y de acceso gratuito,
+        sin representar ninguna entidad comercial.
+    </em>
+</div>
 
 {% endblock %}

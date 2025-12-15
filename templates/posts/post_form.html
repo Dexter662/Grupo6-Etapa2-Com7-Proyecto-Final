@@ -16,7 +16,6 @@
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
-                    <!-- Título -->
                     <div class="mb-3">
                         <label class="form-label">Título</label>
                         {{ form.title }}
@@ -27,7 +26,6 @@
                         {% endif %}
                     </div>
 
-                    <!-- Contenido -->
                     <div class="mb-3">
                         <label class="form-label">Contenido</label>
                         {{ form.content }}
@@ -38,7 +36,6 @@
                         {% endif %}
                     </div>
 
-                    <!-- Imagen -->
                     <div class="mb-3">
                         <label class="form-label">Imagen</label>
                         {{ form.image }}
@@ -56,7 +53,6 @@
                         {% endif %}
                     </div>
 
-                    <!-- Botones -->
                     <div class="d-flex justify-content-between mt-4">
                         <a href="{% url 'posts:lista' %}" class="btn btn-secondary">
                             Cancelar

@@ -4,104 +4,98 @@
 
 {% block content %}
 
-<h2>BIENVENIDO 🏠</h2>
+<div class="text-center mb-4">
+    <h2 class="fw-bold">BIENVENIDO 🏠</h2>
+</div>
 
 {% if not user.is_authenticated %}
 
-    {# ============================ #}
-    {# USUARIO NO LOGUEADO #}
-    {# ============================ #}
-    <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem provident sunt soluta corporis,
-        illo quaerat quae odio laboriosam quo deserunt adipisci repudiandae est voluptates voluptatem eum
-        necessitatibus, nobis minima aperiam.
-    </p>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p class="card-text">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem provident sunt soluta corporis,
+            illo quaerat quae odio laboriosam quo deserunt adipisci repudiandae est voluptates voluptatem eum
+            necessitatibus, nobis minima aperiam.
+        </p>
 
-    <li>
-        <a href="{% url 'posts:lista' %}">
-            <button type="button">Ir a Publicaciones 📰</button>
-        </a>
-    </li>
+        <div class="text-center mt-3">
+            <a href="{% url 'posts:lista' %}" class="btn btn-success">
+                Ir a Publicaciones 📰
+            </a>
+        </div>
+    </div>
+</div>
 
 {% else %}
 
-    <p>Hola, <strong>{{ user.username }}</strong> 👋</p>
-    <p>Has iniciado sesión correctamente.</p>
+<div class="card shadow-sm mb-4">
+    <div class="card-body text-center">
+        <p class="mb-1">Hola, <strong>{{ user.username }}</strong> 👋</p>
+        <p class="text-muted mb-0">Has iniciado sesión correctamente.</p>
+    </div>
+</div>
 
-    {# ============================ #}
-    {# ADMIN #}
-    {# ============================ #}
-    {% if user.rol == 'admin' %}
+{% if user.rol == 'admin' %}
 
-        <h3>Panel Administrador 🛡️</h3>
-        <ul>
-            <li>
-                <a href="{% url 'posts:lista' %}">
-                    <button type="button">Gestionar Publicaciones 📰</button>
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'users:list' %}">
-                    <button type="button">Gestionar Usuarios 👥</button>
-                </a>
-            </li>
-        </ul>
+<div class="card border-success mb-4">
+    <div class="card-header bg-success text-white">
+        Panel Administrador 🛡️
+    </div>
+    <div class="card-body">
+        <div class="d-grid gap-2">
+            <a href="{% url 'posts:lista' %}" class="btn btn-outline-success">
+                Gestionar Publicaciones 📰
+            </a>
+            <a href="{% url 'users:list' %}" class="btn btn-outline-success">
+                Gestionar Usuarios 👥
+            </a>
+        </div>
+    </div>
+</div>
 
-    {# ============================ #}
-    {# AUTOR #}
-    {# ============================ #}
-    {% elif user.rol == 'author' %}
+{% elif user.rol == 'author' %}
 
-        <h3>Panel Autor ✍️</h3>
-        <ul>
-            <li>
-                <a href="{% url 'posts:lista' %}">
-                    <button type="button">Mis Publicaciones 📰</button>
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'posts:crear' %}">
-                    <button type="button">Crear Publicación ➕</button>
-                </a>
-            </li>
-            <li>
-                {% if user.id == request.user.id %}
-                    <a href="{% url 'users:profile_edit' %}">
-                        <button type="button">Editar perfil</button>
-                    </a>
-                {% endif %}
-            </li>
-        </ul>
+<div class="card border-warning mb-4">
+    <div class="card-header bg-warning text-dark">
+        Panel Autor ✍️
+    </div>
+    <div class="card-body">
+        <div class="d-grid gap-2">
+            <a href="{% url 'posts:lista' %}" class="btn btn-outline-warning">
+                Mis Publicaciones 📰
+            </a>
+            <a href="{% url 'posts:crear' %}" class="btn btn-outline-warning">
+                Crear Publicación ➕
+            </a>
+            <a href="{% url 'users:profile_edit' %}" class="btn btn-outline-secondary">
+                Editar Perfil 👤
+            </a>
+        </div>
+    </div>
+</div>
 
-    {# ============================ #}
-    {# USUARIO COMÚN #}
-    {# ============================ #}
-    {% else %}
+{% else %}
 
-        <h3>Mi cuenta 👤</h3>
-        <ul>
-            <li>
-                <a href="{% url 'posts:lista' %}">
-                    <button type="button">Ver Publicaciones 📰</button>
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'users:detail' user.id %}">
-                    <button type="button">Mi Perfil 👤</button>
-                </a>
-            </li>
-            <li>
-                {% if user.id == request.user.id %}
-                    <a href="{% url 'users:profile_edit' %}">
-                        <button type="button">Editar perfil</button>
-                    </a>
-                {% endif %}
-            </li>
-        </ul>
+<div class="card border-primary mb-4">
+    <div class="card-header bg-primary text-white">
+        Mi Cuenta 👤
+    </div>
+    <div class="card-body">
+        <div class="d-grid gap-2">
+            <a href="{% url 'posts:lista' %}" class="btn btn-outline-primary">
+                Ver Publicaciones 📰
+            </a>
+            <a href="{% url 'users:detail' user.id %}" class="btn btn-outline-primary">
+                Mi Perfil 👤
+            </a>
+            <a href="{% url 'users:profile_edit' %}" class="btn btn-outline-secondary">
+                Editar Perfil
+            </a>
+        </div>
+    </div>
+</div>
 
-    {% endif %}
-
-
+{% endif %}
 {% endif %}
 
 {% endblock %}

@@ -7,30 +7,33 @@
 
 <h2 class="mb-4 text-success fw-bold">📰 Publicaciones</h2>
 
-<form method="get" class="mb-4">
-    <select name="categoria">
+<form method="get" class="mb-4 d-flex flex-wrap gap-2 align-items-center">
+    <select name="categoria" class="form-select w-auto">
         <option value="">Todas las categorías</option>
         {% for categoria in categorias %}
             <option value="{{ categoria.id }}"
-                {% if categoria.id|stringformat:"s" == categoria_seleccionada %}
-                    selected
-                {% endif %}
-            >
+                {% if categoria.id|stringformat:"s" == categoria_seleccionada %} selected {% endif %}>
                 {{ categoria.nombre }}
             </option>
         {% endfor %}
     </select>
 
-    <input type="date" name="fecha" value="{{ fecha_seleccionada }}">
+    <input type="date" name="fecha" value="{{ fecha_seleccionada }}" class="form-control w-auto">
 
-    <button type="submit">Filtrar</button>
+    <button type="submit" class="btn btn-success">
+        Filtrar
+    </button>
 </form>
 
-{% if user.is_authenticated and user.rol == 'admin' or user.rol == 'author' %}
-    <a href="{% url 'posts:crear' %}" class="btn btn-success mb-4">
-        ➕ Nueva publicación
-    </a>
+
+{% if user.is_authenticated %}
+    {% if user.rol == 'admin' or user.rol == 'author' %}
+        <a href="{% url 'posts:crear' %}" class="btn btn-success mb-4">
+            ➕ Nueva publicación
+        </a>
+    {% endif %}
 {% endif %}
+
 
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
@@ -44,8 +47,7 @@
                 <img src="{% static 'img/post-default.jpg' %}" class="card-img-top" alt="Imagen por defecto">
             {% endif %}
 
-            <div class="card-body d-flex flex-column">
-
+            <div class="card-body d-flex flex-column" style="background-color: #f6e58d;">
                 <h5 class="card-title text-success">
                     {{ post.title }}
                 </h5>
@@ -59,25 +61,21 @@
                     📅 {{ post.created_at|date:"d/m/Y" }}
                 </p>
 
-                <div class="mt-auto">
-
-                    <a href="{% url 'posts:detalle' post.id %}"
-                       class="btn btn-outline-success btn-sm">
+                <div class="mt-auto d-flex gap-2 flex-wrap">
+                    <a href="{% url 'posts:detalle' post.id %}" class="btn btn-outline-success btn-sm">
                         Leer más
                     </a>
 
-                    {% if user.is_authenticated and user == post.author or user.rol == 'admin' %}
-                        <a href="{% url 'posts:editar' post.id %}"
-                           class="btn btn-outline-warning btn-sm">
-                            Editar
-                        </a>
-
-                        <a href="{% url 'posts:eliminar' post.id %}"
-                           class="btn btn-outline-danger btn-sm">
-                            Eliminar
-                        </a>
+                    {% if user.is_authenticated %}
+                        {% if user.rol == 'admin' or user.rol == 'author' %}
+                            <a href="{% url 'posts:editar' post.id %}" class="btn btn-outline-warning btn-sm">
+                                Editar
+                            </a>
+                            <a href="{% url 'posts:eliminar' post.id %}" class="btn btn-outline-danger btn-sm">
+                                Eliminar
+                            </a>
+                        {% endif %}
                     {% endif %}
-
                 </div>
             </div>
         </div>

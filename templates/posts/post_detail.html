@@ -2,7 +2,6 @@
 
 {% block content %}
 
-<!-- 📄 POST -->
 <div class="card mb-4">
     {% if post.image %}
         <img src="{{ post.image.url }}" class="card-img-top">
@@ -19,7 +18,6 @@
 
 <hr>
 
-<!-- 💬 COMENTARIOS -->
 <h4>💬 Comentarios</h4>
 
 {% for comment in comments %}
@@ -49,7 +47,6 @@
 <p>No hay comentarios todavía.</p>
 {% endfor %}
 
-<!-- 🧹 PAGINACIÓN -->
 {% if comments.has_other_pages %}
 <nav aria-label="Paginación de comentarios">
     <ul class="pagination justify-content-center mt-4">
@@ -88,7 +85,6 @@
 
 <hr>
 
-<!-- ✍️ FORMULARIO -->
 {% if user.is_authenticated %}
 <h5>✍️ Escribir comentario</h5>
 
