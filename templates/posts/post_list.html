@@ -1,27 +1,73 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Publicaciones{% endblock %}
 
 {% block content %}
-<h1>Publicaciones</h1>
+
+<h2 class="mb-4 text-success fw-bold">📰 Publicaciones</h2>
 
 {% if user.is_authenticated and user.rol == 'admin' or user.rol == 'author' %}
-    <a href="{% url 'posts:crear' %}">Nueva publicación</a>
+    <a href="{% url 'posts:crear' %}" class="btn btn-success mb-4">
+        ➕ Nueva publicación
+    </a>
 {% endif %}
 
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
 {% for post in posts %}
-    <article>
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.content|truncatewords:30 }}</p>
+    <div class="col">
+        <div class="card h-100 shadow-sm">
 
-        {% if post.image %}
-            <img src="{{ post.image.url }}" width="200">
-        {% endif %}
+            {% if post.image %}
+                <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
+            {% else %}
+                <img src="{% static 'img/post-default.jpg' %}" class="card-img-top" alt="Imagen por defecto">
+            {% endif %}
 
-        {% if post.author == user %}
-            <a href="{% url 'posts:editar' post.id %}">Editar</a>
-            <a href="{% url 'posts:eliminar' post.id %}">Eliminar</a>
-        {% endif %}
-    </article>
+            <div class="card-body d-flex flex-column">
+
+                <h5 class="card-title text-success">
+                    {{ post.title }}
+                </h5>
+
+                <p class="card-text">
+                    {{ post.content|truncatewords:30 }}
+                </p>
+
+                <p class="text-muted small">
+                    ✍️ {{ post.author.username }} <br>
+                    📅 {{ post.created_at|date:"d/m/Y" }}
+                </p>
+
+                <div class="mt-auto">
+
+                    <a href="{% url 'posts:detalle' post.id %}"
+                       class="btn btn-outline-success btn-sm">
+                        Leer más
+                    </a>
+
+                    {% if user.is_authenticated and user == post.author or user.rol == 'admin' %}
+                        <a href="{% url 'posts:editar' post.id %}"
+                           class="btn btn-outline-warning btn-sm">
+                            Editar
+                        </a>
+
+                        <a href="{% url 'posts:eliminar' post.id %}"
+                           class="btn btn-outline-danger btn-sm">
+                            Eliminar
+                        </a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% empty %}
     <p>No hay publicaciones.</p>
 {% endfor %}
+
+</div>
+
 {% endblock %}
