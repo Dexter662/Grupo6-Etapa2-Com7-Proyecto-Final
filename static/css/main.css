@@ -1,60 +1,51 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f2f5f2;
+/* ====== COLORES BASE ====== */
+:root {
+    --agtech-green: #2e7d32;
+    --agtech-yellow: #f6e58d;
 }
 
-.navbar {
-    background: #2e7d32;
-    color: white;
-    padding: 1rem;
-}
-
-.nav-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.container {
+/* ====== CONTENEDOR ====== */
+.container-agtech {
+    background-color: var(--agtech-yellow);
     padding: 2rem;
-    background: #f6e58d;
+    border-radius: 12px;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+/* ====== NAVBAR ====== */
+.navbar-agtech {
+    background-color: #2e7d32;
+}
+
+.navbar-agtech .navbar-brand,
+.navbar-agtech .nav-link {
+    color: #ffffff !important;
+}
+
+
+/* ====== FOOTER ====== */
+.footer-agtech {
+    background-color: #2e7d32;
+    color: #ffffff;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.footer-agtech a {
+    color: #ffffff;
+}
+
+.footer-agtech a:hover {
+    opacity: 0.8;
+}
+
+/* ====== CARD ====== */
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
 }
 
 .card {
-    background: white;
-    padding: 1rem;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,.1);
-}
-
-.card a {
-    color: #2e7d32;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.footer {
-    background: #1b5e20;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 3rem;
-}
-
-a {
-    text-decoration: none
-}
-
-.disclaimer {
-    margin-top: 40px;   /* separación de arriba */
-    font-size: 0.9em;   /* un poco más chico */
-    color: #555;        /* gris suave */
-    text-align: center; /* opcional */
+    border-radius: 12px;
 }

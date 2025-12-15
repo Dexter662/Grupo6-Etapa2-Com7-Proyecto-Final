@@ -1,22 +1,62 @@
-<header class="navbar">
-    <div class="nav-wrapper">
-        <h1>🌱 Proyecto Final</h1>
-        <nav>
-            <a href="{% url 'inicio' %}" style="color: white;">Inicio</a>
-            {% if user.is_authenticated %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-agtech">
+        <div class="container">
 
-            <a href="{% url 'apps.autenticacion:confirmar_logout' %}">
-                <button type="button">Cerrar Sesión</button>
+            <!-- Logo / Título -->
+            <a class="navbar-brand fw-bold" href="{% url 'inicio' %}">
+                🌱 Blog Noticias AgTech
             </a>
-        {% else %}
 
-            <a href="{% url 'apps.autenticacion:ingresar' %}">
-                <button type="button">Iniciar Sesión 🔐</button>
-            </a>
-            <a href="{% url 'apps.autenticacion:registrar' %}">
-                <button type="button">Crear Cuenta 📝</button>
-            </a>
-        {% endif %}
-        </nav>
-    </div>
+            <!-- Botón mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarAgtech" aria-controls="navbarAgtech"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarAgtech">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <span class="nav-link">
+                                Hola, {{ user.username }}
+                            </span>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light ms-lg-2"
+                               href="{% url 'apps.autenticacion:confirmar_logout' %}">
+                                Cerrar sesión
+                            </a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light ms-lg-2"
+                               href="{% url 'apps.autenticacion:ingresar' %}">
+                                Iniciar sesión 🔐
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="btn btn-light text-success ms-lg-2"
+                               href="{% url 'apps.autenticacion:registrar' %}">
+                                Crear cuenta 📝
+                            </a>
+                        </li>
+
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+    </nav>
 </header>

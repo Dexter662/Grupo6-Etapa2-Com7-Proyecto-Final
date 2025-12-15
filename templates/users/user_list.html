@@ -3,6 +3,10 @@
 {% block content %}
 <h2>Usuarios</h2>
 
+<a href="{% url 'apps.autenticacion:registrar' %}">
+    <button type="button">Crear nuevo usuario 📝</button>
+</a>
+<br><br>
 <table>
   <tr>
     <th>Usuario</th>
