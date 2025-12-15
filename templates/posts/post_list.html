@@ -5,7 +5,9 @@
 
 {% block content %}
 
-<form method="get">
+<h2 class="mb-4 text-success fw-bold">📰 Publicaciones</h2>
+
+<form method="get" class="mb-4">
     <select name="categoria">
         <option value="">Todas las categorías</option>
         {% for categoria in categorias %}
@@ -23,25 +25,6 @@
 
     <button type="submit">Filtrar</button>
 </form>
-
-<a href="{% url 'posts:crear' %}">Nueva publicación</a>
-
-{% for post in posts %}
-    <article>
-        <h2>{{ post.title }}</h2>
-        <p><strong>Categoría:</strong> {{ post.categoria }}</p>
-        <p>{{ post.content|truncatewords:30 }}</p>
-
-        {% if post.image %}
-            <img src="{{ post.image.url }}" width="200">
-        {% endif %}
-
-        {% if post.author == user or user.is_staff %}
-            <a href="{% url 'posts:editar' post.id %}">Editar</a>
-            <a href="{% url 'posts:eliminar' post.id %}">Eliminar</a>
-        {% endif %}
-    </article>
-<h2 class="mb-4 text-success fw-bold">📰 Publicaciones</h2>
 
 {% if user.is_authenticated and user.rol == 'admin' or user.rol == 'author' %}
     <a href="{% url 'posts:crear' %}" class="btn btn-success mb-4">
@@ -104,7 +87,6 @@
     <p>No hay publicaciones.</p>
 {% endfor %}
 
-{% endblock %}
 </div>
 
 {% endblock %}

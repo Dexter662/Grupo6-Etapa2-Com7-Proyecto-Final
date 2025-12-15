@@ -11,6 +11,7 @@ router.register(r'posts', PostViewSet, basename='post')
 # Las urlpatterns del router incluyen todas las rutas CRUD para /posts/
 #urlpatterns = router.urls
 urlpatterns = [
+    path('', post_list, name='lista'),
     path('crear/', post_create, name='crear'),
     path('editar/<int:pk>/', post_update, name='editar'),
     path('eliminar/<int:pk>/', post_delete, name='eliminar'),

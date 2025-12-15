@@ -11,7 +11,7 @@ urlpatterns = [
     #path('publicaciones/', include('apps.publicaciones.urls')),
     path('autenticacion/', include('apps.autenticacion.urls')),
 
-    path('posts/', include(('apps.posts.urls', 'posts'), namespace='posts')),
+    path('posts/', include('apps.posts.urls')),
     path('api/',  include('apps.posts.urls')),
 
     # URLS de la API V1
