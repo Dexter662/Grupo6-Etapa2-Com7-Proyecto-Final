@@ -4,13 +4,11 @@ from .models import Post, Comment
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'image']
+        fields = ['title', 'content', 'categoria', 'image']  # incluimos categoria
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'content': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 5
-            }),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
+            'categoria': forms.Select(attrs={'class': 'form-select'}),  # select bootstrap
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
