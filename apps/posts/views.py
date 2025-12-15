@@ -6,6 +6,7 @@ from .models import Post, Comment
 from .forms import CommentForm, PostForm
 from .serializers import PostSerializer
 from .permissions import IsAuthorOrReadOnly
+from django.core.paginator import Paginator
 
 class PostViewSet(viewsets.ModelViewSet):
     """
@@ -75,8 +76,16 @@ def post_delete(request, pk):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    comments = post.comments.select_related('author').all()
 
+    # 👉 TODOS los comentarios del post
+    comment_list = post.comments.select_related('author').order_by('-created_at')
+
+    # 👉 PAGINADOR (5 comentarios por página)
+    paginator = Paginator(comment_list, 5)
+    page_number = request.GET.get('page')
+    comments = paginator.get_page(page_number)
+
+    # 👉 Formulario
     form = None
     if request.user.is_authenticated:
         if request.method == 'POST':

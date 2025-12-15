@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<!-- 📄 POST -->
 <div class="card mb-4">
     {% if post.image %}
         <img src="{{ post.image.url }}" class="card-img-top">
@@ -17,6 +19,7 @@
 
 <hr>
 
+<!-- 💬 COMENTARIOS -->
 <h4>💬 Comentarios</h4>
 
 {% for comment in comments %}
@@ -30,12 +33,12 @@
         {% if user == comment.author or user.rol == 'admin' %}
             <div class="mt-2">
                 <a href="{% url 'posts:editar_comentario' comment.id %}"
-                class="btn btn-sm btn-warning">
+                   class="btn btn-sm btn-warning">
                     ✏️ Editar
                 </a>
 
                 <a href="{% url 'posts:eliminar_comentario' comment.id %}"
-                class="btn btn-sm btn-danger">
+                   class="btn btn-sm btn-danger">
                     🗑️ Eliminar
                 </a>
             </div>
@@ -46,8 +49,46 @@
 <p>No hay comentarios todavía.</p>
 {% endfor %}
 
+<!-- 🧹 PAGINACIÓN -->
+{% if comments.has_other_pages %}
+<nav aria-label="Paginación de comentarios">
+    <ul class="pagination justify-content-center mt-4">
+
+        {% if comments.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ comments.previous_page_number }}">
+                    « Anterior
+                </a>
+            </li>
+        {% endif %}
+
+        {% for num in comments.paginator.page_range %}
+            {% if comments.number == num %}
+                <li class="page-item active">
+                    <span class="page-link">{{ num }}</span>
+                </li>
+            {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if comments.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ comments.next_page_number }}">
+                    Siguiente »
+                </a>
+            </li>
+        {% endif %}
+
+    </ul>
+</nav>
+{% endif %}
+
 <hr>
 
+<!-- ✍️ FORMULARIO -->
 {% if user.is_authenticated %}
 <h5>✍️ Escribir comentario</h5>
 
