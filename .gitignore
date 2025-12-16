@@ -13,7 +13,7 @@ env/
 .env
 .env.*
 *.log
-*.sqlite3
+#*.sqlite3
 
 # Archivos de sistema operativo (macOS, Windows)
 .DS_Store
