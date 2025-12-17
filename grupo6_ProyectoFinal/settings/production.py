@@ -25,8 +25,12 @@ CSRF_COOKIE_SECURE = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Dexter662$blog',
+        'USER': 'Dexter662',
+        'PASSWORD': '3nf4rm1t4r34',
+        'HOST': 'Dexter662.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
 
