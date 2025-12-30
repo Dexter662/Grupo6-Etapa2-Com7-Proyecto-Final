@@ -1,0 +1,51 @@
+/* ====== COLORES BASE ====== */
+:root {
+    --agtech-green: #2e7d32;
+    --agtech-yellow: #f6e58d;
+}
+
+/* ====== CONTENEDOR ====== */
+.container-agtech {
+    background-color: var(--agtech-yellow);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+/* ====== NAVBAR ====== */
+.navbar-agtech {
+    background-color: #2e7d32;
+}
+
+.navbar-agtech .navbar-brand,
+.navbar-agtech .nav-link {
+    color: #ffffff !important;
+}
+
+
+/* ====== FOOTER ====== */
+.footer-agtech {
+    background-color: #2e7d32;
+    color: #ffffff;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.footer-agtech a {
+    color: #ffffff;
+}
+
+.footer-agtech a:hover {
+    opacity: 0.8;
+}
+
+/* ====== CARD ====== */
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card {
+    border-radius: 12px;
+}

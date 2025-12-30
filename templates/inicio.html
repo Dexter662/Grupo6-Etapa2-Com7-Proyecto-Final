@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+<div class="text-center mb-4">
+    <h2 class="fw-bold">BIENVENIDO 🏠</h2>
+</div>
+
+{% if not user.is_authenticated %}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <p class="card-text">
+            Te contamos las últimas novedades sobre agtech en el sector agropecuario, 
+            para que puedas optimizar tu campo sumando tecnología que funciona.
+        </p>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'posts:lista' %}" class="btn btn-success">
+                Ir a Publicaciones 📰
+            </a>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body text-center">
+        <p class="mb-1">Hola, <strong>{{ user.username }}</strong> 👋</p>
+        <p class="text-muted mb-0">Has iniciado sesión correctamente.</p>
+    </div>
+</div>
+
+{% if user.rol == 'admin' %}
+
+<div class="card border-success mb-4">
+    <div class="card-header bg-success text-white">
+        Panel Administrador 🛡️
+    </div>
+    <div class="card-body">
+        <div class="d-grid gap-2">
+            <a href="{% url 'posts:lista' %}" class="btn btn-outline-success">
+                Gestionar Publicaciones 📰
+            </a>
+
+            <a href="{% url 'users:list' %}" class="btn btn-outline-success">
+                Gestionar Usuarios 👥
+            </a>
+
+            <a href="{% url 'posts:categoria_lista' %}" class="btn btn-outline-success">
+                Gestionar Categorías 🏷️
+            </a>
+        </div>
+    </div>
+</div>
+
+{% elif user.rol == 'author' %}
+
+<div class="card border-warning mb-4">
+    <div class="card-header bg-warning text-dark">
+        Panel Autor ✍️
+    </div>
+    <div class="card-body">
+        <div class="d-grid gap-2">
+            <a href="{% url 'posts:lista' %}" class="btn btn-outline-warning">
+                Mis Publicaciones 📰
+            </a>
+            <a href="{% url 'posts:crear' %}" class="btn btn-outline-warning">
+                Crear Publicación ➕
+            </a>
+            <a href="{% url 'users:profile_edit' %}" class="btn btn-outline-secondary">
+                Editar Perfil 👤
+            </a>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+<div class="card border-primary mb-4">
+    <div class="card-header bg-primary text-white">
+        Mi Cuenta 👤
+    </div>
+    <div class="card-body">
+        <div class="d-grid gap-2">
+            <a href="{% url 'posts:lista' %}" class="btn btn-outline-primary">
+                Ver Publicaciones 📰
+            </a>
+            <a href="{% url 'users:detail' user.id %}" class="btn btn-outline-primary">
+                Mi Perfil 👤
+            </a>
+            <a href="{% url 'users:profile_edit' %}" class="btn btn-outline-secondary">
+                Editar Perfil
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endif %}
+
+{% endblock %}

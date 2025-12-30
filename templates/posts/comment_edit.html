@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h4>✏️ Editar comentario</h4>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-success">
+                    Guardar cambios
+                </button>
+
+                <a href="{% url 'posts:detalle' comment.post.id %}"
+                   class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+        
